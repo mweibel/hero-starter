@@ -64,7 +64,7 @@
 //   if (myHero.health < 30) {
 //     return helpers.findNearestHealthWell(gameData);
 //   } else {
-//     return helpers.findNearestEnemy(gameData);
+//     return helpers.findNearestEnemy(gameData).direction;
 //   }
 // };
 
@@ -154,7 +154,7 @@ var move = function(gameData, helpers) {
 
   var nearestTeamMember = helpers.findNearestTeamMember(gameData);
   var nearestUnownedDiamondMine = helpers.findNearestUnownedDiamondMine(gameData);
-  var nearestWeakerEnemy = helpers.findNearestWeakerEnemy(gameData);
+  var nearestEnemy = helpers.findNearestEnemy(gameData);
 
   if (myHero.health < 40) {
     //Heal no matter what if low health
@@ -163,18 +163,15 @@ var move = function(gameData, helpers) {
     //Heal if you aren't 80% health and are close to a health well already
     return directionToHealthWell;
   } else if(nearestUnownedDiamondMine && nearestTeamMember) {
-    console.log(nearestTeamMember, nearestUnownedDiamondMine);
     if(nearestUnownedDiamondMine.distance < nearestTeamMember.distance) {
       return nearestUnownedDiamondMine.direction;
     }
-    return nearestTeamMember.direction;
+    if(nearestTeamMember.health < myHero.health) {
+      return nearestTeamMember.direction;
+    }
   }
-  // just if there's a weaker enemy go to nearest weaker enemy
-  if(nearestWeakerEnemy) {
-    return nearestWeakerEnemy.direction;
-  }
-  // just by default get yourself into a health well
-  return directionToHealthWell;
+
+  return nearestEnemy.direction;
 };
 
 // Export the move function here

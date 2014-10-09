@@ -228,7 +228,7 @@ helpers.findNearestEnemy = function(gameData) {
   });
 
   //Return the direction that needs to be taken to achieve the goal
-  return pathInfoObject.direction;
+  return pathInfoObject;
 };
 
 // Returns the direction & distance of the nearest friendly champion
