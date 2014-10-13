@@ -156,7 +156,7 @@ var move = function(gameData, helpers) {
   var nearestUnownedDiamondMine = helpers.findNearestUnownedDiamondMine(gameData);
   var nearestEnemy = helpers.findNearestEnemy(gameData);
 
-  if (myHero.health < 40) {
+  if (myHero.health < 50) {
     //Heal no matter what if low health
     return directionToHealthWell;
   } else if (myHero.health < 80 && distanceToHealthWell === 1) {
